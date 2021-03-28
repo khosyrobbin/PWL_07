@@ -25,6 +25,8 @@
            <th>Kelas</th>
            <th>Jurusan</th>
            <th>No_Handphone</th>
+           <th>Email</th>
+           <th>Tanggal_Lahir</th>
            <th width="280px">Action</th>
         </tr>
 
@@ -35,6 +37,8 @@
                 <td>{{$Mahasiswa->kelas}}</td>
                 <td>{{$Mahasiswa->jurusan}}</td>
                 <td>{{$Mahasiswa->no_handphone}}</td>
+                <td>{{$Mahasiswa->email}}</td>
+                <td>{{$Mahasiswa->tanggal_lahir}}</td>
                 <td> 
                     <form action="{{route('mahasiswa.destroy',$Mahasiswa->nim)}}" method="POST">
                         <a class="btn btninfo" href="{{route('mahasiswa.show',$Mahasiswa->nim)}}">Show</a>

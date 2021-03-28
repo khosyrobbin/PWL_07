@@ -44,7 +44,9 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
-            'no_handphone' => 'required'
+            'no_handphone' => 'required',
+            'email' => 'required',
+            'tanggal_lahir' => 'required'
         ]);
 
         //menambah data
@@ -95,7 +97,9 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
-            'no_handphone' => 'required'
+            'no_handphone' => 'required',
+            'email' => 'required',
+            'tanggal_lahir' => 'required'
         ]);
 
         //update data inputan kita
