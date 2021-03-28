@@ -52,4 +52,10 @@
             </tr>
         @endforeach
     </table>
+    <br/>
+    Halaman : {{ $mahasiswas->currentPage() }} <br/>
+    Jumlah Data : {{ $mahasiswas->total() }} <br/>
+    Data perhalaman : {{ $mahasiswas->perPage() }} <br/>
+    <br>
+    {{$mahasiswas->links()}} 
 @endsection 
