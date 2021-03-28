@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Database\Seeders\MahasiswaSeeder;
 
 class MahasiswaController extends Controller
 {
@@ -14,8 +15,8 @@ class MahasiswaController extends Controller
     public function index()
     {
         $mahasiswas = Mahasiswa::all();//mengambil semua isi tabel
-        $post = Mahasiswa::orderBy('Nim', 'desc')->paginate (6);
-        return view ('mahasiswas.index', compact('mahasiswa'));
+        $post = Mahasiswa::orderBy('nim', 'desc')->paginate (6);
+        return view ('mahasiswas.index', compact('mahasiswas'));
         with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -50,8 +51,7 @@ class MahasiswaController extends Controller
         Mahasiswa::create($request->all());
 
         //Jika berhasil input data-> kembali ke home
-        return redirect()->route('mahasiswas.index')
-            ->with('sucsess', 'Mahasiswa berhasil ditambahkan');
+        return redirect()->route('mahasiswa.index')->with('sucsess', 'Mahasiswa berhasil ditambahkan');
     }
 
     /**
@@ -77,7 +77,7 @@ class MahasiswaController extends Controller
     {
         //menampilkan detail data berdasarkan nim untuk diedit
         $Mahasiswa = Mahasiswa::find($nim);
-        return viw('mahasiswas.edit', compact('Mahasiswa'));
+        return view('mahasiswas.edit', compact('Mahasiswa'));
     }
 
     /**
@@ -102,8 +102,7 @@ class MahasiswaController extends Controller
         Mahasiswa::find($nim)->update($request->all());
 
         //jika berhasil -> home
-        return redirect()->route('mahasiswas.index')
-            ->with('sucsess', 'Mahasiswa berhasil diupsate');
+        return redirect()->route('mahasiswa.index')->with('sucsess', 'Mahasiswa berhasil diupdate');
     }
 
     /**
@@ -116,7 +115,6 @@ class MahasiswaController extends Controller
     {
         //menghapus data
         Mahasiswa::find($nim)->delete();
-        return redirect()->route('mahasiswas.index')
-        ->with('sucsess', 'Mahasiswa berhasil diupsate');
+        return redirect()->route('mahasiswa.index')->with('sucsess', 'Mahasiswa berhasil diupsate');
     }
 }

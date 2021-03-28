@@ -10,14 +10,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mahasiswa extends Model
 {
-    protected $table="mahasiswa";
+    protected $table="mahasiswas";
     public $timestamps= false;
     protected $primaryKey = 'nim';
 
     protected $fillable = [
         'nim',
         'nama',
+        'kelas',
         'jurusan',
-        'no_handphone',
+        'no_handphone'
     ];
 };
