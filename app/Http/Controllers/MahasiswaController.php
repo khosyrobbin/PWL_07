@@ -15,7 +15,7 @@ class MahasiswaController extends Controller
     {
         $mahasiswas = Mahasiswa::all();//mengambil semua isi tabel
         $post = Mahasiswa::orderBy('Nim', 'desc')->paginate (6);
-        return view ('mahasiswa.index', compact('mahasiswa'));
+        return view ('mahasiswas.index', compact('mahasiswa'));
         with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -26,7 +26,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create');
+        return view('mahasiswas.create');
     }
 
     /**
@@ -102,7 +102,7 @@ class MahasiswaController extends Controller
         Mahasiswa::find($nim)->update($request->all());
 
         //jika berhasil -> home
-        return redirect()->route('mahasiswa.index')
+        return redirect()->route('mahasiswas.index')
             ->with('sucsess', 'Mahasiswa berhasil diupsate');
     }
 
@@ -116,7 +116,7 @@ class MahasiswaController extends Controller
     {
         //menghapus data
         Mahasiswa::find($nim)->delete();
-        return redirect()->route('mahasiswa.index')
+        return redirect()->route('mahasiswas.index')
         ->with('sucsess', 'Mahasiswa berhasil diupsate');
     }
 }
