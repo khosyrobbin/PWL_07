@@ -57,7 +57,10 @@ class MahasiswaController extends Controller
         $Mahasiswa->no_handphone = $request->get('no_handphone');
         $Mahasiswa->email = $request->get('email');
         $Mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
+        $Mahasiswa->save();
 
+        $kelas = new Kelas;
+        $kelas->id = $request->get('kelas');
         //menambah data
         // Mahasiswa::create($request->all());
         $Mahasiswa->kelas()->associate($kelas);
@@ -89,8 +92,9 @@ class MahasiswaController extends Controller
     public function edit($nim)
     {
         //menampilkan detail data berdasarkan nim untuk diedit
-        $Mahasiswa = Mahasiswa::find($nim);
-        return view('mahasiswas.edit', compact('Mahasiswa'));
+        $Mahasiswa = Mahasiswa::with('kelas')->where('nim',$nim)->first();
+        $kelas = Kelas::all();
+        return view('mahasiswas.edit', compact('Mahasiswa','kelas'));
     }
 
     /**
@@ -112,9 +116,23 @@ class MahasiswaController extends Controller
             'email' => 'required',
             'tanggal_lahir' => 'required'
         ]);
+        
+        $Mahasiswa = Mahasiswa::with('kelas')->where('nim',$nim)->first();
+        $Mahasiswa->nim = $request->get('nim');
+        $Mahasiswa->nama = $request->get('nama');
+        $Mahasiswa->jurusan = $request->get('jurusan');
+        $Mahasiswa->no_handphone = $request->get('no_handphone');
+        $Mahasiswa->email = $request->get('email');
+        $Mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
+        $Mahasiswa->save();
 
+        $kelas = new Kelas;
+        $kelas->id = $request->get('kelas');
+
+        $Mahasiswa->kelas()->associate($kelas);
+        $Mahasiswa->save();
         //update data inputan kita
-        Mahasiswa::find($nim)->update($request->all());
+        //Mahasiswa::find($nim)->update($request->all());
 
         //jika berhasil -> home
         return redirect()->route('mahasiswa.index')->with('sucsess', 'Mahasiswa berhasil diupdate');
