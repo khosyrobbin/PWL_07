@@ -34,7 +34,7 @@
                             <label for="kelas">Kelas</label>
                             <select class="form-control">
                             @foreach ($kelas as $kls)
-                                <option value="{{$kls->id}}">{{$kls->nama_kelas}}></option>   
+                                <option value="{{$kls->id}}">{{$kls->nama_kelas}}</option>   
                             @endforeach
                             </select>
                             {{-- <input type="kelas" name="kelas" class="formcontrol" id="kelas" aria-describedby="kelas"> --}}
