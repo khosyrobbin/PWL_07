@@ -50,8 +50,18 @@ class MahasiswaController extends Controller
             'tanggal_lahir' => 'required'
         ]);
 
+        $mahasiswas = new Mahasiswa;
+        $mahasiswas->nim = $request->get('nim');
+        $mahasiswas->nama = $request->get('nama');
+        $mahasiswas->jurusan = $request->get('jurusan');
+        $mahasiswas->no_handphone = $request->get('no_handphone');
+        $mahasiswas->email = $request->get('email');
+        $mahasiswas->tanggal_lahir = $request->get('tanggal_lahir');
+
         //menambah data
-        Mahasiswa::create($request->all());
+        // Mahasiswa::create($request->all());
+        $mahasiswas->kelas()->associate($kelas);
+        $mahasiswas->save();
 
         //Jika berhasil input data-> kembali ke home
         return redirect()->route('mahasiswa.index')->with('sucsess', 'Mahasiswa berhasil ditambahkan');
