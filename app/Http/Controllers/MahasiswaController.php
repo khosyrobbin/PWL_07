@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Database\Seeders\MahasiswaSeeder;
 
@@ -14,7 +15,7 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mahasiswas = Mahasiswa::paginate(5);//mengambil semua isi tabel
+        $mahasiswas = Mahasiswa::with('kelas')->get();//mengambil semua isi tabel
         $post = Mahasiswa::orderBy('nim', 'desc')->paginate (6);
         return view ('mahasiswas.index', compact('mahasiswas'));
         with('i', (request()->input('page', 1) - 1) * 5);
@@ -127,4 +128,6 @@ class MahasiswaController extends Controller
         $Mahasiswa = Mahasiswa::where('nama','like',"%".$search."%")->get();
         return view('mahasiswas.index',['Mahasiswas'=>$Mahasiswa]);
     }
+
+
 }
