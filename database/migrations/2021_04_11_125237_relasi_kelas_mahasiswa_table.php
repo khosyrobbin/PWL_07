@@ -13,7 +13,11 @@ class RelasiKelasMahasiswaTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('mahasiswas', function (Blueprint $table) {
+            $table->dropColumn('kelas');
+            $table->unsignedBigInteger('kelas_id')->nullable();
+            $table->foreign('kelas_id')->references('id')->on('kelas');
+        });
     }
 
     /**
@@ -23,6 +27,9 @@ class RelasiKelasMahasiswaTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('mahasiswas', function (Blueprint $table) {
+            $table->string('kelas');
+            $table->dropForeign(['kelas_id']);
+        });
     }
 }
