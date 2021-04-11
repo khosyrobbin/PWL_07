@@ -50,18 +50,18 @@ class MahasiswaController extends Controller
             'tanggal_lahir' => 'required'
         ]);
 
-        $mahasiswas = new Mahasiswa;
-        $mahasiswas->nim = $request->get('nim');
-        $mahasiswas->nama = $request->get('nama');
-        $mahasiswas->jurusan = $request->get('jurusan');
-        $mahasiswas->no_handphone = $request->get('no_handphone');
-        $mahasiswas->email = $request->get('email');
-        $mahasiswas->tanggal_lahir = $request->get('tanggal_lahir');
+        $Mahasiswa = new Mahasiswa;
+        $Mahasiswa->nim = $request->get('nim');
+        $Mahasiswa->nama = $request->get('nama');
+        $Mahasiswa->jurusan = $request->get('jurusan');
+        $Mahasiswa->no_handphone = $request->get('no_handphone');
+        $Mahasiswa->email = $request->get('email');
+        $Mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
 
         //menambah data
         // Mahasiswa::create($request->all());
-        $mahasiswas->kelas()->associate($kelas);
-        $mahasiswas->save();
+        $Mahasiswa->kelas()->associate($kelas);
+        $Mahasiswa->save();
 
         //Jika berhasil input data-> kembali ke home
         return redirect()->route('mahasiswa.index')->with('sucsess', 'Mahasiswa berhasil ditambahkan');
@@ -76,8 +76,8 @@ class MahasiswaController extends Controller
     public function show($nim)
     {
         //show data dengan mengurutkan nim
-        $Mahasiswa = Mahasiswa::find($nim);
-        return view('mahasiswas.detail', compact('Mahasiswa'));
+        $Mahasiswa = Mahasiswa::with('kelas')->where('nim',$nim)->first();
+        return view('mahasiswas.detail', ['Mahasiswa'=>$Mahasiswa]);
     }
 
     /**
